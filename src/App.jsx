@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { LayoutGroup, MotionConfig } from 'framer-motion';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -14,6 +15,15 @@ const sectionIds = sections.map((s) => s.id);
 
 export default function App() {
   const active = useActiveSection(sectionIds);
+
+  // Opening a shared link like /#team: the browser jumps before the dials have
+  // measured themselves, so jump again once the layout has settled.
+  useEffect(() => {
+    const id = window.location.hash.slice(1);
+    if (!id) return;
+    const t = setTimeout(() => document.getElementById(id)?.scrollIntoView({ behavior: 'instant' }), 350);
+    return () => clearTimeout(t);
+  }, []);
 
   return (
     <MotionConfig reducedMotion="user">

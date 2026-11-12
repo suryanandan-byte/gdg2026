@@ -31,29 +31,18 @@ export const siteConfig = {
 
   contact: {
     email: 'gdg.viit@example.com', // TODO: official email
-    addressLines: ['[College full name]', '[Campus address line]', '[City, State – PIN]'],
-    /**
-     * Form submission endpoint (e.g. a Formspree form URL).
-     * Leave empty and the form will offer to open the visitor's email app instead.
-     */
-    formEndpoint: '',
   },
 
-  /** Social links — empty url means "not set yet" and renders as disabled. */
+  /**
+   * Social links shown in the Contact section and footer.
+   * Empty url means "not set yet" and renders as "Coming soon".
+   * Add or remove platforms here; icons exist for: instagram, linkedin, github, x, youtube (add an entry to use it).
+   */
   socials: [
     { id: 'instagram', label: 'Instagram', handle: '@gdg.viit', url: '' },
     { id: 'linkedin', label: 'LinkedIn', handle: 'GDG VIIT', url: '' },
     { id: 'github', label: 'GitHub', handle: 'gdg-viit', url: '' },
     { id: 'x', label: 'X', handle: '@gdgviit', url: '' },
-    { id: 'youtube', label: 'YouTube', handle: 'GDG VIIT', url: '' },
-  ],
-
-  /** Impact figures — value: null shows as "to be verified". */
-  impact: [
-    { label: 'Events hosted', value: null },
-    { label: 'Community members', value: null },
-    { label: 'Workshop hours', value: null },
-    { label: 'Projects built', value: null },
   ],
 };
 

@@ -24,15 +24,16 @@ function NavMark() {
   );
 }
 
-export function JoinButton({ className = '', children = 'Join us', onClick }) {
+export function JoinButton({ className = '', children = 'Join us', onClick, onDark = false }) {
   const href = getJoinHref();
   const external = isExternal(href);
+  const colors = onDark ? 'bg-paper text-ink hover:bg-g-blue hover:text-white' : 'bg-ink text-paper hover:bg-accent-ink';
   return (
     <a
       href={href}
       onClick={onClick}
       {...(external ? { target: '_blank', rel: 'noreferrer' } : {})}
-      className={`inline-flex items-center gap-1.5 rounded-full bg-ink px-4 py-2 text-sm font-medium text-paper transition-colors duration-300 hover:bg-accent-ink ${className}`}
+      className={`inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-medium transition-colors duration-300 ${colors} ${className}`}
     >
       {children} {external && <ArrowUpRight size={15} />}
     </a>
@@ -57,19 +58,33 @@ export default function Navbar({ active }) {
   }, []);
 
   const close = () => setOpen(false);
+  const { heroDark } = useMark();
+  const dark = heroDark && !open; // light text while over the dark hero
+
+  const surface = dark
+    ? scrolled
+      ? 'border-b border-white/10 bg-[#161513]/70 backdrop-blur-md'
+      : 'border-b border-transparent'
+    : scrolled || open
+      ? 'border-b border-line-soft bg-paper/85 backdrop-blur-md'
+      : 'border-b border-transparent';
+  const linkIdle = dark ? 'text-paper/65 hover:text-paper' : 'text-muted hover:text-ink';
+  const linkActive = dark ? 'text-paper' : 'text-ink';
 
   return (
     <header
       data-accent={accentFor(active)}
-      className={`sticky top-0 z-40 transition-[background-color,border-color] duration-300 ${
-        scrolled || open ? 'border-b border-line-soft bg-paper/85 backdrop-blur-md' : 'border-b border-transparent'
-      }`}
+      className={`sticky top-0 z-40 transition-[background-color,border-color] duration-300 ${surface}`}
     >
       <a href="#about" className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-3 focus:rounded focus:bg-surface focus:px-3 focus:py-2">
         Skip to content
       </a>
       <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-8" aria-label="Main">
-        <a href="#home" className="flex items-center gap-2.5 text-[15px] text-ink" aria-label="GDG VIIT — back to top">
+        <a
+          href="#home"
+          className={`flex items-center gap-2.5 text-[15px] transition-colors duration-300 ${dark ? 'text-paper' : 'text-ink'}`}
+          aria-label="GDG VIIT — back to top"
+        >
           <NavMark />
           <Logo />
         </a>
@@ -82,7 +97,7 @@ export default function Navbar({ active }) {
                 <a
                   href={`#${item.id}`}
                   aria-current={isActive ? 'true' : undefined}
-                  className={`relative block px-3 py-2 text-[15px] transition-colors ${isActive ? 'text-ink' : 'text-muted hover:text-ink'}`}
+                  className={`relative block px-3 py-2 text-[15px] transition-colors duration-300 ${isActive ? linkActive : linkIdle}`}
                 >
                   <span className="link-underline">{item.label}</span>
                   {isActive && (
@@ -101,20 +116,22 @@ export default function Navbar({ active }) {
               href={externalNav.href}
               target="_blank"
               rel="noreferrer"
-              className="group flex items-center gap-1 px-3 py-2 text-[15px] text-muted transition-colors hover:text-ink"
+              className={`group flex items-center gap-1 px-3 py-2 text-[15px] transition-colors duration-300 ${linkIdle}`}
             >
               <span className="link-underline">{externalNav.label}</span>
               <ArrowUpRight size={14} className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
             </a>
           </li>
           <li className="ml-2">
-            <JoinButton />
+            <JoinButton onDark={dark} />
           </li>
         </ul>
 
         <button
           type="button"
-          className="grid size-10 place-items-center rounded-full border border-line bg-surface md:hidden"
+          className={`grid size-10 place-items-center rounded-full border transition-colors duration-300 md:hidden ${
+            dark ? 'border-white/20 bg-white/5 text-paper' : 'border-line bg-surface text-ink'
+          }`}
           aria-expanded={open}
           aria-controls="mobile-menu"
           aria-label={open ? 'Close menu' : 'Open menu'}

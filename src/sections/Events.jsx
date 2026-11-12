@@ -35,12 +35,12 @@ export default function Events() {
     <Container>
       <SectionIntro
         id="events-title"
-        eyebrow="Events"
-        title="Workshops, hackathons and talks"
-        intro="Everything we run, in one place. Upcoming sessions open for registration here; completed ones keep their photos and highlights."
+        eyebrow="What’s on"
+        title="Events"
+        intro="Workshops, hackathons and talks — register for what’s next or look back at past sessions."
       />
 
-      <div className="flex flex-col gap-4 border-y border-line py-4 md:flex-row md:items-center md:justify-between">
+      <div className="flex flex-col gap-3 border-y border-line py-3 md:flex-row md:items-center md:justify-between">
         <div role="tablist" aria-label="Event status" className="inline-flex w-fit rounded-full border border-line bg-surface p-1">
           {statuses.map((s) => (
             <button
@@ -82,7 +82,10 @@ export default function Events() {
         </div>
       </div>
 
-      <motion.div layout className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <motion.div
+        layout
+        className="no-scrollbar -mx-5 mt-6 flex snap-x snap-mandatory scroll-px-5 gap-3 overflow-x-auto px-5 pb-2 sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-4 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-3"
+      >
         <AnimatePresence mode="popLayout">
           {visible.map((event) => (
             <EventCard key={event.id} event={event} onOpen={setOpen} />
@@ -96,7 +99,7 @@ export default function Events() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="rounded-2xl border border-dashed border-line px-6 py-16 text-center text-muted"
+            className="rounded-2xl border border-dashed border-line px-6 py-10 text-center text-muted"
           >
             No {status} events in this category yet — check back soon.
           </motion.p>

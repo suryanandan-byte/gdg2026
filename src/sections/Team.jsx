@@ -1,59 +1,46 @@
+import { useState } from 'react';
 import { Container, Section, SectionIntro } from '../components/SectionHeading';
-import SectionHeading from '../components/SectionHeading';
 import TeamDial from '../components/TeamDial';
+import TeamMember from '../components/TeamMember';
 import Reveal from '../components/Reveal';
 import { dials, membersOf, team } from '../data/team';
 import { siteConfig } from '../data/siteConfig';
 
 export default function Team() {
+  const [selectedId, setSelectedId] = useState(team[0].id);
+  const [previewId, setPreviewId] = useState(null);
+  const shown = team.find((m) => m.id === (previewId ?? selectedId));
+  const shownDial = dials.find((d) => d.id === shown.dial);
+
+  const dialProps = (dial) => ({
+    dial,
+    members: membersOf(dial.id),
+    activeId: shown.id,
+    onPreview: setPreviewId,
+    onSelect: (id) => {
+      setSelectedId(id);
+      setPreviewId(null);
+    },
+  });
+
   return (
     <Section id="team" accent="yellow">
-    <Container>
-      <SectionIntro
-        id="team-title"
-        eyebrow={`Team · Tenure ${siteConfig.tenure}`}
-        title="The people behind GDG VIIT"
-        intro="Turn the dial. Hover or tap a circle to meet the organisers and domain leads running the chapter this tenure."
-      />
+      <Container>
+        <SectionIntro
+          id="team-title"
+          eyebrow={`Team · ${siteConfig.tenure}`}
+          title="Meet the team"
+          intro="Hover or tap a circle on either dial to meet the organisers and domain leads."
+        />
 
-      <div className="space-y-24 sm:space-y-28">
-        {dials.map((dial) => {
-          const members = membersOf(dial.id);
-          return (
-            <div key={dial.id}>
-              <SectionHeading
-                id={`dial-${dial.id}`}
-                index={`Dial ${dial.index}`}
-                kicker={`${members.length} members`}
-                title={dial.title}
-              />
-              <Reveal className="mt-10">
-                <TeamDial
-                  dial={dial}
-                  members={members}
-                  large={dial.id === 'leadership'}
-                  maxSize={dial.id === 'leadership' ? 460 : 560}
-                />
-              </Reveal>
-            </div>
-          );
-        })}
-
-        <div>
-          <SectionHeading id="roster" index="Roster" title="Everyone, at a glance" />
-          <Reveal className="mt-8">
-            <ul className="grid gap-x-10 sm:grid-cols-2 lg:grid-cols-3">
-              {team.map((m) => (
-                <li key={m.id} className="flex items-baseline justify-between gap-4 border-b border-line-soft py-3">
-                  <span className="text-ink">{m.name}</span>
-                  <span className="label shrink-0 text-muted">{m.domain}</span>
-                </li>
-              ))}
-            </ul>
-          </Reveal>
-        </div>
-      </div>
-    </Container>
+        <Reveal className="grid grid-cols-1 items-center gap-8 lg:grid-cols-[minmax(0,0.75fr)_minmax(0,1fr)_300px] lg:gap-6">
+          <TeamDial {...dialProps(dials[0])} large maxSize={300} />
+          <div className="lg:order-none order-last">
+            <TeamDial {...dialProps(dials[1])} maxSize={420} />
+          </div>
+          <TeamMember member={shown} dialTitle={`Dial ${shownDial.index} — ${shownDial.title}`} />
+        </Reveal>
+      </Container>
     </Section>
   );
 }

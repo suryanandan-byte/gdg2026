@@ -36,7 +36,7 @@ export function Section({ id, accent, className = '', children }) {
 /** Top of each section: mono eyebrow, display title, short intro. */
 export function SectionIntro({ id, eyebrow, title, intro, children }) {
   return (
-    <header className="pb-12 pt-24 sm:pb-16 sm:pt-32">
+    <header className="pb-8 pt-16 sm:pb-10 sm:pt-20">
       <motion.p
         className="label flex items-center gap-2 text-accent-ink"
         initial={{ opacity: 0 }}
@@ -47,12 +47,12 @@ export function SectionIntro({ id, eyebrow, title, intro, children }) {
         <span className="size-2 rounded-full bg-accent" aria-hidden />
         {eyebrow}
       </motion.p>
-      <h2 id={id} className="mt-5 font-display text-[clamp(2.4rem,7vw,5rem)] leading-[0.95] tracking-[-0.02em] text-ink">
+      <h2 id={id} className="mt-4 font-display text-[clamp(2rem,5vw,3.5rem)] leading-[0.95] tracking-[-0.02em] text-ink">
         <WordReveal text={title} delay={0.05} />
       </h2>
       {intro && (
         <motion.p
-          className="mt-6 max-w-xl text-lg leading-relaxed text-muted"
+          className="mt-4 max-w-xl leading-relaxed text-muted"
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={inView}
