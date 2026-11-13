@@ -32,7 +32,7 @@ export default function About() {
               className="group border-b border-r border-line p-4 transition-colors duration-300 hover:bg-surface sm:p-6"
             >
               <span className="label text-accent-ink">{String(i + 1).padStart(2, '0')}</span>
-              <h3 className="mt-2 font-semibold text-ink sm:text-lg">{a.title}</h3>
+              <h3 className="mt-2 font-display text-ink sm:text-lg">{a.title}</h3>
               <p className="mt-1 text-sm leading-relaxed text-muted">{a.text}</p>
             </Reveal>
           ))}

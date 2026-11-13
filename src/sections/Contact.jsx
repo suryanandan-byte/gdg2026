@@ -12,7 +12,7 @@ function ChannelCard({ icon, label, handle, href, external = true }) {
         {icon}
       </span>
       <span className="min-w-0 flex-1">
-        <span className="block font-semibold leading-tight text-ink">{label}</span>
+        <span className="block font-display leading-tight text-ink">{label}</span>
         <span className="block truncate text-sm text-muted">{href ? handle : 'Coming soon'}</span>
       </span>
       {href && (

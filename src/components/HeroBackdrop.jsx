@@ -2,13 +2,13 @@ import { motion } from 'framer-motion';
 import { Rocket, Planet, Bulb, Satellite, Sparkle, Comet } from './Stickers';
 
 /**
- * Orbit rings: three thin rings turning very slowly around the G·D·G mark,
+ * Orbit rings: three thin ink rings turning very slowly around the G·D·G mark,
  * each carrying one small "satellite" dot. Centred on `centerY` (px).
  */
 const rings = [
-  { size: 'clamp(300px, 46vw, 560px)', duration: 70, dir: 1, color: '#4285F4', style: 'solid', alpha: 0.12, dotAt: 30 },
-  { size: 'clamp(460px, 72vw, 880px)', duration: 110, dir: -1, color: '#FBBC04', style: 'dashed', alpha: 0.1, dotAt: 200 },
-  { size: 'clamp(640px, 100vw, 1220px)', duration: 160, dir: 1, color: '#34A853', style: 'solid', alpha: 0.07, dotAt: 120 },
+  { size: 'clamp(300px, 46vw, 560px)', duration: 70, dir: 1, color: '#4285F4', style: 'solid', alpha: 0.16, dotAt: 30 },
+  { size: 'clamp(460px, 72vw, 880px)', duration: 110, dir: -1, color: '#EA4335', style: 'dashed', alpha: 0.14, dotAt: 200 },
+  { size: 'clamp(640px, 100vw, 1220px)', duration: 160, dir: 1, color: '#34A853', style: 'solid', alpha: 0.1, dotAt: 120 },
 ];
 
 function Orbits({ centerY, play }) {
@@ -25,7 +25,7 @@ function Orbits({ centerY, play }) {
             top: 0,
             x: '-50%',
             y: '-50%',
-            border: `1px ${r.style} rgba(245, 241, 232, ${r.alpha})`,
+            border: `1px ${r.style} rgba(28, 27, 25, ${r.alpha})`,
             rotate: r.dotAt,
           }}
           initial={{ opacity: 0, scale: 0.85 }}
@@ -42,7 +42,7 @@ function Orbits({ centerY, play }) {
         >
           <span
             className="absolute left-1/2 top-0 size-2 -translate-x-1/2 -translate-y-1/2 rounded-full"
-            style={{ backgroundColor: r.color, boxShadow: `0 0 14px 2px ${r.color}66` }}
+            style={{ backgroundColor: r.color, boxShadow: `0 0 0 3px rgba(255, 255, 255, 0.7)` }}
           />
         </motion.div>
       ))}
@@ -60,8 +60,8 @@ const stickers = [
   { Art: Bulb, pos: { left: '11%', bottom: '17%' }, size: 'clamp(50px, 6vw, 80px)', tilt: 8, float: 6, mobile: false },
   { Art: Satellite, pos: { right: '10%', bottom: '19%' }, size: 'clamp(56px, 7vw, 92px)', tilt: -6, float: 7, mobile: true },
   { Art: Comet, pos: { left: '4%', top: '50%' }, size: 'clamp(36px, 4vw, 56px)', tilt: 14, float: 5, mobile: false },
-  { Art: () => <Sparkle color="#FBBC04" />, pos: { right: '25%', bottom: '9%' }, size: 'clamp(26px, 3vw, 40px)', tilt: 0, float: 4, mobile: false },
-  { Art: () => <Sparkle color="#F5F1E8" />, pos: { right: '5%', top: '48%' }, size: 'clamp(18px, 2vw, 26px)', tilt: 0, float: 3, mobile: false },
+  { Art: () => <Sparkle color="#4285F4" />, pos: { right: '25%', bottom: '9%' }, size: 'clamp(26px, 3vw, 40px)', tilt: 0, float: 4, mobile: false },
+  { Art: () => <Sparkle color="#EA4335" />, pos: { right: '5%', top: '48%' }, size: 'clamp(18px, 2vw, 26px)', tilt: 0, float: 3, mobile: false },
 ];
 
 function Stickers({ show, play }) {

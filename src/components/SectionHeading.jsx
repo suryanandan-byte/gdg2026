@@ -74,7 +74,7 @@ export default function SectionHeading({ index, title, kicker, id, className = '
         {index && <span className="label text-accent-ink">{index}</span>}
         {kicker && <span className="label text-muted">{kicker}</span>}
       </div>
-      <h3 id={id} className="mt-3 text-[clamp(1.5rem,3vw,2.2rem)] font-semibold leading-tight tracking-[-0.01em]">
+      <h3 id={id} className="mt-3 font-display text-[clamp(1.4rem,2.8vw,2rem)] leading-tight tracking-[-0.01em]">
         {title}
       </h3>
     </Reveal>

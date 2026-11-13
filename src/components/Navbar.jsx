@@ -24,10 +24,10 @@ function NavMark() {
   );
 }
 
-export function JoinButton({ className = '', children = 'Join us', onClick, onDark = false }) {
+export function JoinButton({ className = '', children = 'Join us', onClick }) {
   const href = getJoinHref();
   const external = isExternal(href);
-  const colors = onDark ? 'bg-paper text-ink hover:bg-g-blue hover:text-white' : 'bg-ink text-paper hover:bg-accent-ink';
+  const colors = 'bg-ink text-paper hover:bg-accent-ink';
   return (
     <a
       href={href}
@@ -58,18 +58,11 @@ export default function Navbar({ active }) {
   }, []);
 
   const close = () => setOpen(false);
-  const { heroDark } = useMark();
-  const dark = heroDark && !open; // light text while over the dark hero
-
-  const surface = dark
-    ? scrolled
-      ? 'border-b border-white/10 bg-[#161513]/70 backdrop-blur-md'
-      : 'border-b border-transparent'
-    : scrolled || open
-      ? 'border-b border-line-soft bg-paper/85 backdrop-blur-md'
-      : 'border-b border-transparent';
-  const linkIdle = dark ? 'text-paper/65 hover:text-paper' : 'text-muted hover:text-ink';
-  const linkActive = dark ? 'text-paper' : 'text-ink';
+  // Transparent over the yellow hero; frosted paper once scrolled.
+  const surface = scrolled || open ? 'border-b border-line-soft bg-paper/85 backdrop-blur-md' : 'border-b border-transparent';
+  // Ink-soft rather than muted so idle links stay readable on yellow.
+  const linkIdle = 'text-ink-soft hover:text-ink';
+  const linkActive = 'text-ink';
 
   return (
     <header
@@ -82,7 +75,7 @@ export default function Navbar({ active }) {
       <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-8" aria-label="Main">
         <a
           href="#home"
-          className={`flex items-center gap-2.5 text-[15px] transition-colors duration-300 ${dark ? 'text-paper' : 'text-ink'}`}
+          className="flex items-center gap-2.5 text-[15px] text-ink"
           aria-label="GDG VIIT — back to top"
         >
           <NavMark />
@@ -123,15 +116,13 @@ export default function Navbar({ active }) {
             </a>
           </li>
           <li className="ml-2">
-            <JoinButton onDark={dark} />
+            <JoinButton />
           </li>
         </ul>
 
         <button
           type="button"
-          className={`grid size-10 place-items-center rounded-full border transition-colors duration-300 md:hidden ${
-            dark ? 'border-white/20 bg-white/5 text-paper' : 'border-line bg-surface text-ink'
-          }`}
+          className="grid size-10 place-items-center rounded-full border border-line bg-surface text-ink md:hidden"
           aria-expanded={open}
           aria-controls="mobile-menu"
           aria-label={open ? 'Close menu' : 'Open menu'}

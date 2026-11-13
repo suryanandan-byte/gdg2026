@@ -143,7 +143,7 @@ export default function EventModal({ event, onClose }) {
                     <span className="label rounded-full border border-dashed border-line px-2.5 py-1 text-muted">Sample data</span>
                   )}
                 </div>
-                <h2 id="event-modal-title" className="mt-4 text-[clamp(1.6rem,4vw,2.4rem)] font-semibold leading-tight">
+                <h2 id="event-modal-title" className="mt-4 font-display text-[clamp(1.5rem,3.6vw,2.2rem)] leading-tight tracking-[-0.01em]">
                   {event.title}
                 </h2>
 

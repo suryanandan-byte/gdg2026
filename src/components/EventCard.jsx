@@ -56,7 +56,7 @@ const EventCard = forwardRef(function EventCard({ event, onOpen }, ref) {
           )}
         </div>
 
-        <h3 className="mt-2 text-lg font-semibold leading-snug text-ink">{event.title}</h3>
+        <h3 className="mt-2 font-display text-lg leading-snug text-ink">{event.title}</h3>
         <p className="mt-1 flex items-center gap-1.5 text-sm text-muted">
           <MapPin size={14} aria-hidden /> {event.venue}
         </p>

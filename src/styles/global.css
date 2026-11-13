@@ -108,7 +108,7 @@
   cursor: grab;
   touch-action: none;
   filter: drop-shadow(2px 0 0 #fff) drop-shadow(-2px 0 0 #fff) drop-shadow(0 2px 0 #fff)
-    drop-shadow(0 -2px 0 #fff) drop-shadow(0 8px 12px rgb(0 0 0 / 0.35));
+    drop-shadow(0 -2px 0 #fff) drop-shadow(0 6px 10px rgb(60 40 0 / 0.22));
 }
 .sticker svg {
   width: 100%;

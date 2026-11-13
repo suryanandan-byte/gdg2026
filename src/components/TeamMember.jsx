@@ -11,7 +11,7 @@ export function Avatar({ member, className = '', textClassName = '' }) {
     return <img src={member.photo} alt="" loading="lazy" className={`size-full rounded-full object-cover ${className}`} />;
   }
   return (
-    <span className={`grid size-full place-items-center rounded-full font-semibold tracking-wide ${className} ${textClassName}`}>
+    <span className={`grid size-full place-items-center rounded-full font-display tracking-wide ${className} ${textClassName}`}>
       {initialsOf(member.name)}
     </span>
   );
@@ -42,7 +42,7 @@ export default function TeamMember({ member, dialTitle }) {
             </div>
             <div className="min-w-0">
               <p className="label text-muted">{dialTitle}</p>
-              <h3 className="mt-1 text-lg font-semibold leading-snug text-ink">{member.name}</h3>
+              <h3 className="mt-1 font-display text-lg leading-snug text-ink">{member.name}</h3>
             </div>
           </div>
 

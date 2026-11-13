@@ -12,10 +12,10 @@ export default function Footer() {
       <section aria-labelledby="global-community" className="border-t border-line">
         <Container className="flex flex-col gap-5 py-10 md:flex-row md:items-center md:justify-between">
           <Reveal>
-            <p className="label text-muted">Part of something bigger</p>
-            <h2 id="global-community" className="mt-2 max-w-xl font-semibold leading-snug sm:text-lg">
-              {globalCommunity.intro}
+            <h2 id="global-community" className="font-display text-xl tracking-[-0.01em] text-ink sm:text-2xl">
+              Part of something bigger
             </h2>
+            <p className="mt-2 max-w-xl leading-relaxed text-ink-soft">{globalCommunity.intro}</p>
           </Reveal>
           <Reveal delay={0.1} className="shrink-0">
             <a
